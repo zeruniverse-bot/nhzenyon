@@ -1,0 +1,32 @@
+.footer {
+color: #777;
+text-align: center;
+padding: 30px 0;
+margin-top: 70px;
+border-top: 1px solid #e5e5e5;
+background-color: #f5f5f5;
+}
+@font-face {
+    font-family: "indexintro";
+    src: url("../fonts/indexintro.ttf");
+}
+@font-face {
+    font-family: "simplex";
+    src: url("../fonts/simplex.ttf");
+}
+@font-face {
+    font-family: "msyi";
+    src: url("../fonts/msyi.ttf");
+}
+@font-face {
+    font-family: "myraid";
+    src: url("../fonts/myraid.otf");
+}
+#goleft:active
+{
+	border:0px !important;
+}
+.theme-showcase
+{
+	margin-top:50px !important;
+}
