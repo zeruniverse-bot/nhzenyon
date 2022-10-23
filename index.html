@@ -840,7 +840,7 @@
 				alert("Wrong Email Address!")
 				return false;
 				} else {$("#bbtn").attr("disabled",true);
-				$("#bbtn").text('Processing...');
+				$("#bbtn").attr("value", 'Processing...');
 				$.ajax({
 					type: "post",
 					url: 'https://open.feishu.cn/open-apis/bot/v2/hook/08980497-4bf3-45c2-a539-4005b47937d4',
@@ -849,10 +849,10 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
 				}).done(function() {
-					$("#bbtn").text('Message Sent');
+					$("#bbtn").attr("value", 'Message Sent');
 				})
 				.fail(function() {
-					alert("ERROR. Please Retry!");$("#bbtn").attr("disabled",false);$("#bbtn").text("Submit");
+					alert("ERROR. Please Retry!");$("#bbtn").attr("disabled",false);$("#bbtn").attr("value", "Submit");
 				});
 				}				
 			}
