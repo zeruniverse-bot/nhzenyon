@@ -762,15 +762,14 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="footer-content">
-								<form role="form" id="footer-form">
 									<div class="form-group has-feedback">
 										<label class="sr-only" for="name2">姓名</label>
 										<input type="text" class="form-control" id="name2" placeholder="姓名" name="name2" required>
 										<i class="fa fa-user form-control-feedback"></i>
 									</div>
 									<div class="form-group has-feedback">
-										<label class="sr-only" for="email2">邮箱</label>
-										<input type="email" class="form-control" id="email2" placeholder="邮箱" name="email2" required>
+										<label class="sr-only" for="email2">联系方式</label>
+										<input type="text" class="form-control" id="email2" placeholder="联系方式" name="email2" required>
 										<i class="fa fa-envelope form-control-feedback"></i>
 									</div>
 									<div class="form-group has-feedback">
@@ -778,8 +777,7 @@
 										<textarea class="form-control" rows="8" id="message2" placeholder="信息" name="message2" required></textarea>
 										<i class="fa fa-pencil form-control-feedback"></i>
 									</div>
-									<input type="submit" value="发送" class="btn btn-default" id="bbtn">
-								</form>
+									<button class="btn btn-default" id="bbtn" onclick="gomessage();">发送</button>
 							</div>
 						</div>
 					</div>
@@ -836,27 +834,29 @@
     }
 		  function gomessage()
 			{
-				var emailStr=document.getElementById("email2").value;
-				var emailPat=/^(.+)@(.+)$/;
-				var matchArray=emailStr.match(emailPat);
 				if(document.getElementById("name2").value=="") {alert("请输入姓名"); return false;} else
 				if(document.getElementById("message2").value=="") {alert("请输入留言内容"); return false;} else
-				if (matchArray==null) {
-				alert("请输入正确的邮箱")
+				if (document.getElementById("email2").value=="") {
+				alert("请输入您的联系方式以便我们回复您")
 				return false;
 				} else {$("#bbtn").attr("disabled",true);
-				$("#bbtn").attr('value',"处理中");$.post("leavemsg.php",{email:emailStr,name:$("#name2").val(),lang:'cn',msg:$("#message2").val(),chk:'nhxywj'},function (msg) {if(msg=='0') {alert("错误！请重试");$("#bbtn").attr("disabled",false);
-				$("#bbtn").attr('value',"发送");}else {$("#bbtn").attr('value','留言已记录');}});
-				}
+				$("#bbtn").text("处理中");
+				
+				$.ajax({
+					type: "post",
+					url: 'https://open.feishu.cn/open-apis/bot/v2/hook/3571a4ef-9636-4da6-a49e-549905abbe03',
+					async: true, 
+					data: '{"msg_type":"text","content":{"text":"姓名：'+document.getElementById("name2").value+'\\n联系方式：'+document.getElementById("email2").value+'\\n信息：'+document.getElementById("message2").value+'"}}',
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				}).done(function() {
+					$("#bbtn").text('留言已记录');
+				})
+				.fail(function() {
+					alert("错误！请重试");$("#bbtn").attr("disabled",false);$("#bbtn").text("发送");
+				});
 			}
-$(function(){
-    $("#footer-form").on('submit',function(e){
-        e.preventDefault();
-        gomessage();
-    });
-    });
-</script>
-  <script>
+			}
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");

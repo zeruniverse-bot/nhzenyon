@@ -17,8 +17,8 @@
 		<link rel="shortcut icon" href="images/favicon.ico">
 
 		<!-- Web Fonts -->
-		<link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		<link href='//fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
 
 		<!-- Bootstrap core CSS -->
 		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -32,7 +32,7 @@
 		<!-- Worthy core CSS file -->
 		<link href="css/style.css" rel="stylesheet">
 
-		<!-- Custom css -->
+		<!-- Custom css --> 
 		<link href="css/custom.css" rel="stylesheet">
 	</head>
 
@@ -42,7 +42,7 @@
 		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
 
 		<!-- header start -->
-		<!-- ================ -->
+		<!-- ================ --> 
 		<header class="header fixed clearfix navbar navbar-fixed-top">
 			<div class="container">
 				<div class="row">
@@ -100,8 +100,8 @@
 												<li><a href="#services">Why Us</a></li>
 												<li><a href="#portfolio">Portfolio</a></li>
 												<li><a href="#contact">Contact</a></li>
-                                                <li><a href="https://www.nhxywj.com">中文</a></li>
-                                                <li><a href="https://www.nhxywj.com/portal">Login</a></li>
+                                                <li><a href="indexcn.html">中文</a></li>
+                                                <li><a style="cursor:pointer" data-toggle="modal" data-target="#cmslogin">Login</a></li>
 											</ul>
 										</div>
 
@@ -145,11 +145,11 @@
 												<h4 class="modal-title" id="logintocms">Login</h4>
 											</div>
 											<div class="modal-body">
-
+								
 													<p>Access-Code： <input id="accesscodetocms" type="text" /> <button onClick="gotologincms();">Login</button><br /></p>
 													<p>The customer-service system is currently open to our customers only. To verify that you are our customer, please input your access code. Access code was sent to you along with your initial password.</p>
 											</div>
-
+									
 											<div class="modal-footer">
 												<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
 											</div>
@@ -296,8 +296,8 @@
 			<div class="container">
 				<h1 class="text-center title" id="portfolio">Portfolio</h1>
 				<div class="separator"></div>
-				<p class="lead text-center">Below are our featured products.<br />Visit our <a href="http://www.nhxywj.com/database.html">product database</a> for all products we manufacturing.</p>
-				<br>
+				<p class="lead text-center">Below are our featured products.<br />Visit our <a href="database.html">product database</a> for all products we manufacturing.</p>
+				<br>			
 				<div class="row object-non-visible" data-animation-effect="fadeIn">
 					<div class="col-md-12">
 
@@ -382,7 +382,7 @@
 								</div>
 								<!-- Modal end -->
 							</div>
-
+							
 							<div class="col-sm-6 col-md-3 isotope-item xy88">
 								<div class="image-box">
 									<div class="overlay-container">
@@ -727,7 +727,7 @@
 
 						</div>
 						<!-- portfolio items end -->
-
+					
 					</div>
 				</div>
 			</div>
@@ -752,7 +752,7 @@
 									<li><i class="fa fa-map-marker pr-10"></i>  I6-6, China Mould City, Ninghai, Zhejiang, China.</li>
 									<li><i class="fa fa-phone pr-10"></i> (+86) 13065858188</li>
 									<li><i class="fa fa-fax pr-10"></i>(+86) 0574-65229922 </li>
-									<li><i class="fa fa-envelope-o pr-10"></i>zhaoyongm AT 126.com</li>
+									<li><i class="fa fa-envelope-o pr-10"></i>zhaoyongm@126.com</li>
 								</ul>
 							</div>
 						</div>
@@ -774,7 +774,7 @@
 										<textarea class="form-control" rows="8" id="message2" placeholder="Message" name="message2" required></textarea>
 										<i class="fa fa-pencil form-control-feedback"></i>
 									</div>
-									<input type="submit" value="Send" id="bbtn" class="btn btn-default">
+									<input type="submit" value="Submit" id="bbtn" class="btn btn-default">
 								</form>
 							</div>
 						</div>
@@ -810,7 +810,7 @@
 
 		<!-- Isotope javascript -->
 		<script type="text/javascript" src="plugins/isotope/isotope.pkgd.min.js"></script>
-
+		
 		<!-- Backstretch javascript -->
 		<script type="text/javascript" src="plugins/jquery.backstretch.min.js"></script>
 
@@ -827,7 +827,7 @@
     <script type="text/javascript">
     function gotologincms()
     {
-    	$.post("http://www.nhxywj.com/redirectcms.php",{access:$("#accesscodetocms").val()},function(msg){if(msg!='0') window.location.href=msg; else alert('error!');});
+    	$.post("redirectcms.php",{access:$("#accesscodetocms").val()},function(msg){if(msg!='0') window.location.href=msg; else alert('error!');});
     }
 		  function gomessage()
 			{
@@ -840,9 +840,21 @@
 				alert("Wrong Email Address!")
 				return false;
 				} else {$("#bbtn").attr("disabled",true);
-				$("#bbtn").attr('value',"Processing...");$.post("http://www.nhxywj.com/leavemsg.php",{email:emailStr,name:$("#name2").val(),lang:'en',msg:$("#message2").val(),chk:'nhxywj'},function (msg) {if(msg=='0') {alert("ERROR. Please Retry!");$("#bbtn").attr("disabled",false);
-				$("#bbtn").attr('value',"Send");}else {$("#bbtn").attr('value','Message Sent');}});
-				}
+				$("#bbtn").text('Processing...');
+				$.ajax({
+					type: "post",
+					url: 'https://open.feishu.cn/open-apis/bot/v2/hook/08980497-4bf3-45c2-a539-4005b47937d4',
+					async: true, 
+					data: '{"msg_type":"text","content":{"text":"Name: '+document.getElementById("name2").value+'\\nEmail: '+document.getElementById("email2").value+'\\nMessage: '+document.getElementById("message2").value+'"}}',
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				}).done(function() {
+					$("#bbtn").text('Message Sent');
+				})
+				.fail(function() {
+					alert("ERROR. Please Retry!");$("#bbtn").attr("disabled",false);$("#bbtn").text("Submit");
+				});
+				}				
 			}
 $(function(){
     $("#footer-form").on('submit',function(e){
@@ -856,7 +868,7 @@ var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?8b1f11564a65683697e3aa352d0a1e84";
-  var s = document.getElementsByTagName("script")[0];
+  var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
